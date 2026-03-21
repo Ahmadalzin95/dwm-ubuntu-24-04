@@ -1,7 +1,13 @@
 #!/bin/bash
 
-# Open arandr for visual setup
+# Open arandr
 arandr
+
+# Re-apply the current wallpaper to cover any new monitors
+CACHE_WP="$HOME/.cache/wallust/wallpaper"
+if [ -f "$CACHE_WP" ]; then
+    feh --bg-scale "$(cat "$CACHE_WP")"
+fi
 
 # Wait for arandr to close, then ask for profile name using dmenu
 PROFILE=$(echo "" | dmenu -p "Save autorandr profile as (or press Esc to cancel):")
