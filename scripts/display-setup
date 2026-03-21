@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Open arandr for visual setup
+arandr
+
+# Wait for arandr to close, then ask for profile name using dmenu
+PROFILE=$(echo "" | dmenu -p "Save autorandr profile as (or press Esc to cancel):")
+
+# If a name was entered, save the profile
+if [ -n "$PROFILE" ]; then
+    autorandr --save "$PROFILE" --force
+    notify-send -a 'System' -i 'video-display' "Monitor Setup" "Profile '$PROFILE' saved successfully!"
+fi
