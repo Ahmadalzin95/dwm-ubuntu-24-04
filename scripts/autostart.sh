@@ -1,1 +1,3 @@
-$HOME/suckless/scripts/monitor.sh &
+#!/bin/sh
+
+autorandr --change &

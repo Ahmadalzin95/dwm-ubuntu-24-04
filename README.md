@@ -1,5 +1,9 @@
 # Ultimate dwm Setup for Ubuntu 24.04
 
+![Ubuntu](https://img.shields.io/badge/Ubuntu-24.04_LTS-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![C](https://img.shields.io/badge/C-Suckless-00599C?style=for-the-badge&logo=c&logoColor=white)
+![Bash](https://img.shields.io/badge/Bash-Scripts-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white)
+
 This repository contains a fully automated, dynamic desktop environment based on the [dwm](https://dwm.suckless.org/) (dynamic window manager) and [dmenu](https://tools.suckless.org/dmenu/) from Suckless. It is specifically designed and optimized for Ubuntu 24.04 LTS.
 
 The setup features a "Material-Black-Blueberry" aesthetic, powered by [Wallust](https://explosion-mental.codeberg.page/wallust/intro.html) for real-time color generation across the entire system.
@@ -74,7 +78,7 @@ All logic is contained within the [scripts/](https://github.com/Ahmadalzin95/dwm
 | `layout_toggle` | Cycles keyboard layouts (`US`, `DE`, `AR`) with system notifications. |
 | `mycal` | Interactive calendar with Vim-like navigation (`j`/`k`) inside a terminal popup. |
 | `lock` | Activates a blurred lockscreen via [Betterlockscreen](https://github.com/betterlockscreen/betterlockscreen). |
-| `monitor.sh` | Sets the Xrandr monitor resolution and positioning. |
+| `display-setup` | Interactive GUI (arandr) to configure and automatically save dynamic monitor profiles. |
 | `screenshot` | Advanced screen capture tool for `areas`, `windows`, or `full monitors`. |
 
 ## Shortcuts & Control
@@ -89,7 +93,8 @@ This configuration uses Alt (Mod1) as the main key and Super (Windows Key) for s
 * `Alt + s`: Open System Menu (Power/WiFi/VPN)
 * `Alt + x`: Open App Manager (Kill running apps)
 * `Alt + F1`: Open Calendar
-* `Super + p`: Open nsxiv Image Gallery
+* `Super + Shift + p`: Open nsxiv Image Gallery
+* `Super + m`: Open Interactive Monitor Setup (display-setup)
 
 ### Window Management
 

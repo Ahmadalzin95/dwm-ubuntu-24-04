@@ -57,6 +57,7 @@ static const char *downvol[] = { "/bin/sh", "-c", "pamixer -d 5 && notify-send -
 static const char *mutevol[] = { "/bin/sh", "-c", "pamixer -t && notify-send -a 'System' -i 'audio-volume-muted' 'Mute Toggled'", NULL };
 static const char *brightnessup[]   = { "/bin/sh", "-c", "brightnessctl set +5% && notify-send -a 'System' -r 998 -h int:value:$(brightnessctl i | grep -oP '\\(\\K[^%]+') -i 'display-brightness' 'Brightness Up'", NULL };
 static const char *brightnessdown[] = { "/bin/sh", "-c", "brightnessctl set 5%- && notify-send -a 'System' -r 998 -h int:value:$(brightnessctl i | grep -oP '\\(\\K[^%]+') -i 'display-brightness' 'Brightness Down'", NULL };
+static const char *displaysetup[] = { "display-setup", NULL };
 
 /* key definitions */
 #define MODKEY Mod1Mask
@@ -173,7 +174,8 @@ static const Key keys[] = {
     { ControlMask|ShiftMask,        XK_space,	spawn,			{.v = dunstcloseall } },
     { ControlMask,                  XK_grave,	spawn,			{.v = dunsthistory } },
     { ControlMask|ShiftMask,        XK_period,	spawn,			{.v = dunstcontext } },
-	{ Mod4Mask,           			XK_p,		spawn,			{.v = explorer } },
+	{ Mod4Mask|ShiftMask,           XK_p,       spawn,          {.v = explorer } },
+    { Mod4Mask,                     XK_m,       spawn,          {.v = displaysetup } },
     { 0,							XK_Print,	spawn,			{.v = screenshot_full }   },
     { Mod4Mask,						XK_s,		spawn,			{.v = screenshot_area }   },
     { Mod4Mask|ShiftMask,			XK_s,		spawn,			{.v = screenshot_window } },

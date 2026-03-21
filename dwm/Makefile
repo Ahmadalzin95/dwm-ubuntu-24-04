@@ -71,14 +71,17 @@ install: all
 
 	cp -f ../scripts/apply-theme ${DESTDIR}${PREFIX}/bin/apply-theme
 	chmod 755 ${DESTDIR}${PREFIX}/bin/apply-theme
-
+	
+	cp -f ../scripts/display-setup ${DESTDIR}${PREFIX}/bin/display-setup
+	chmod 755 ${DESTDIR}${PREFIX}/bin/display-setup
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1
 	# Remove custom scripts
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm-start \
 		${DESTDIR}${PREFIX}/bin/dwm-menu \
-		${DESTDIR}${PREFIX}/bin/app_manager
+		${DESTDIR}${PREFIX}/bin/app_manager \
+		${DESTDIR}${PREFIX}/bin/display-setup
 	# Remove desktop session entry
 	rm -f /usr/share/xsessions/dwm.desktop
 
