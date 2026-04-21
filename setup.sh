@@ -137,6 +137,19 @@ EOF
 mkdir -p "$HOME/.cache/wallust"
 touch "$HOME/.cache/wallust/colors.Xresources"
 
+# Enable tap-to-click for touchpads via libinput
+echo "Configuring X11 touchpad settings..."
+sudo mkdir -p /etc/X11/xorg.conf.d/
+sudo tee /etc/X11/xorg.conf.d/30-touchpad.conf > /dev/null << 'EOF'
+Section "InputClass"
+    Identifier "libinput touchpad catchall"
+    MatchIsTouchpad "on"
+    MatchDevicePath "/dev/input/event*"
+    Driver "libinput"
+    Option "Tapping" "on"
+EndSection
+EOF
+
 # System logo and boot splash
 if [ -f "$ASSET_LOGO" ]; then
     [ -f "$SYSTEM_LOGO" ] && [ ! -f "$SYSTEM_LOGO.back" ] && sudo mv "$SYSTEM_LOGO" "$SYSTEM_LOGO.back"
