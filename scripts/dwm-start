@@ -52,6 +52,9 @@ slstatus &
 # Start Notification Daemon
 dunst &
 
+# Low battery warnings
+battery_monitor &
+
 # Load cursor
 xsetroot -cursor_name left_ptr &
 

@@ -74,6 +74,9 @@ install: all
 	
 	cp -f ../scripts/display-setup ${DESTDIR}${PREFIX}/bin/display-setup
 	chmod 755 ${DESTDIR}${PREFIX}/bin/display-setup
+
+	cp -f ../scripts/battery_monitor ${DESTDIR}${PREFIX}/bin/battery_monitor
+	chmod 755 ${DESTDIR}${PREFIX}/bin/battery_monitor
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1
@@ -81,7 +84,8 @@ uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm-start \
 		${DESTDIR}${PREFIX}/bin/dwm-menu \
 		${DESTDIR}${PREFIX}/bin/app_manager \
-		${DESTDIR}${PREFIX}/bin/display-setup
+		${DESTDIR}${PREFIX}/bin/display-setup \
+		${DESTDIR}${PREFIX}/bin/battery_monitor
 	# Remove desktop session entry
 	rm -f /usr/share/xsessions/dwm.desktop
 

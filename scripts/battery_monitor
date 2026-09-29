@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# Background daemon that warns via notifications on low battery.
+# Fires a single notification each time the charge crosses a threshold
+# downward while discharging (20/15/10/5 %). Warnings reset once charging.
+
+INTERVAL=30                 # seconds between checks
+THRESHOLDS="20 15 10 5"     # descending; <=10 is treated as critical
+
+
+BAT=$(ls /sys/class/power_supply/ 2>/dev/null | grep -m1 BAT)
+[ -z "$BAT" ] && exit 0
+BASE="/sys/class/power_supply/$BAT"
+
+# Highest level already warned about in the current discharge cycle.
+# 999 means "nothing warned yet"; reset to 999 whenever we charge.
+last=999
+
+while true; do
+    if [ -r "$BASE/capacity" ] && [ -r "$BASE/status" ]; then
+        cap=$(cat "$BASE/capacity")
+        state=$(cat "$BASE/status")
+
+        if [ "$state" = "Discharging" ]; then
+            # current = smallest crossed threshold (most severe), 0 if none
+            current=0
+            for t in $THRESHOLDS; do
+                [ "$cap" -le "$t" ] && current=$t
+            done
+
+            # Only warn when we drop to a new, lower level than before.
+            if [ "$current" -ne 0 ] && [ "$current" -lt "$last" ]; then
+                if [ "$current" -le 10 ]; then
+                    urgency="critical"
+                    icon="battery-caution"
+                else
+                    urgency="normal"
+                    icon="battery-low"
+                fi
+                notify-send -a "Battery" -u "$urgency" -r 1001 -i "$icon" \
+                    "Battery low: ${cap}%" "Below ${current}% — please plug in."
+                last=$current
+            fi
+        else
+            # Charging or full: allow warnings to fire again next time.
+            last=999
+        fi
+    fi
+    sleep "$INTERVAL"
+done
