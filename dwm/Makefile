@@ -77,6 +77,9 @@ install: all
 
 	cp -f ../scripts/battery_monitor ${DESTDIR}${PREFIX}/bin/battery_monitor
 	chmod 755 ${DESTDIR}${PREFIX}/bin/battery_monitor
+
+	cp -f ../scripts/chromium-tiled-launch ${DESTDIR}${PREFIX}/bin/chromium-tiled-launch
+	chmod 755 ${DESTDIR}${PREFIX}/bin/chromium-tiled-launch
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1
@@ -85,7 +88,8 @@ uninstall:
 		${DESTDIR}${PREFIX}/bin/dwm-menu \
 		${DESTDIR}${PREFIX}/bin/app_manager \
 		${DESTDIR}${PREFIX}/bin/display-setup \
-		${DESTDIR}${PREFIX}/bin/battery_monitor
+		${DESTDIR}${PREFIX}/bin/battery_monitor \
+		${DESTDIR}${PREFIX}/bin/chromium-tiled-launch
 	# Remove desktop session entry
 	rm -f /usr/share/xsessions/dwm.desktop
 

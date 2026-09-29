@@ -1,0 +1,16 @@
+#!/bin/sh
+# Launch a Chromium-family browser correctly under a tiling WM (dwm).
+
+proc="$1"; shift
+bin="$1"; shift
+flags="--disable-features=CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows"
+
+unset DESKTOP_STARTUP_ID XDG_ACTIVATION_TOKEN
+
+if pgrep -x "$proc" >/dev/null 2>&1; then
+    # Instance already running: new windows must auto-place so they reflow.
+    exec "$bin" $flags "$@"
+else
+    # Cold start: pin position so the broken restored bounds are not used.
+    exec "$bin" $flags --window-position=0,0 "$@"
+fi

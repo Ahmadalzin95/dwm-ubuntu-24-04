@@ -29,6 +29,22 @@ xdg-mime default nsxiv.desktop image/jpeg
 xdg-mime default nsxiv.desktop image/png
 xdg-mime default nsxiv.desktop image/gif
 
+# Chromium-family browsers: fix wrong content-size rendering under tiling WMs.
+mkdir -p "$HOME/.local/share/applications"
+for base in brave-browser google-chrome google-chrome-stable chromium chromium-browser microsoft-edge; do
+    src="/usr/share/applications/${base}.desktop"
+    [ -f "$src" ] || continue
+    case "$base" in
+        brave-browser)                      proc=brave ;;
+        google-chrome|google-chrome-stable) proc=chrome ;;
+        chromium|chromium-browser)          proc=chromium ;;
+        microsoft-edge)                     proc=msedge ;;
+    esac
+    sed -E "s#^Exec=([^ ]+)#Exec=chromium-tiled-launch $proc \1#" \
+        "$src" > "$HOME/.local/share/applications/${base}.desktop"
+done
+update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
+
 # Prepare directories
 mkdir -p "$HOME/.config/dunst" "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0" \
          "$HOME/.themes" "$HOME/.icons" "$HOME/.local/bin" "$HOME/.dwm" \
