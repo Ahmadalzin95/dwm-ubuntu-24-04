@@ -22,7 +22,7 @@ sudo apt install -y build-essential libx11-dev libxinerama-dev libxft-dev git fe
     libxdg-basedir-dev libgdk-pixbuf-2.0-dev picom maim slop xclip xdotool \
     nsxiv plymouth plymouth-themes libpam-systemd gtk2-engines-murrine \
     gtk2-engines-pixbuf unzip xdg-desktop-portal-gtk x11-xserver-utils imagemagick curl \
-    ncal autorandr arandr
+    ncal autorandr arandr zsh
 
 # Image viewer defaults
 xdg-mime default nsxiv.desktop image/jpeg
@@ -144,6 +144,19 @@ fi
 # Shell and Xresources integration
 BASHRC_LINE='[ -f "$HOME/.cache/wallust/sequences" ] && source "$HOME/.cache/wallust/sequences"'
 grep -qF "$BASHRC_LINE" "$HOME/.bashrc" || echo -e "\n$BASHRC_LINE" >> "$HOME/.bashrc"
+
+# zsh + Oh My Zsh: install unattended (don't switch shell or start zsh mid-script),
+# then apply our custom theme and .zshrc, and make zsh the default login shell.
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+mkdir -p "$HOME/.oh-my-zsh/custom/themes"
+cp "$REPO_ROOT/assets/zsh/robbyrussell.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/robbyrussell.zsh-theme"
+cp "$REPO_ROOT/assets/zsh/zshrc" "$HOME/.zshrc"
+if [ "$(getent passwd "$USER" | cut -d: -f7)" != "$(command -v zsh)" ]; then
+    sudo chsh -s "$(command -v zsh)" "$USER"
+fi
 
 cat <<EOF > "$HOME/.Xresources"
 Xcursor.theme: $CURSOR_NAME
