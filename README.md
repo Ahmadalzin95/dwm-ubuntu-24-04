@@ -15,6 +15,8 @@ The setup features a "Material-Black-Blueberry" aesthetic, powered by [Wallust](
 * **One-Command Install:** No manual compilation needed.
 * **Ubuntu Optimized:** Replaces GNOME bloat effectively.
 * **Dynamic Theming:** Wallust integration for instant color switches.
+* **Low-Battery Warnings:** Threshold notifications (20/15/10/5%) plus a color-coded battery reading in the bar.
+* **Preconfigured Zsh:** Zsh + Oh My Zsh as the default shell, with a prompt that follows the Wallust colors.
 
 ## Demo
 
@@ -80,6 +82,8 @@ All logic is contained within the [scripts/](https://github.com/Ahmadalzin95/dwm
 | `lock` | Activates a blurred lockscreen via [Betterlockscreen](https://github.com/betterlockscreen/betterlockscreen). |
 | `display-setup` | Interactive GUI (arandr) to configure and automatically save dynamic monitor profiles. |
 | `screenshot` | Advanced screen capture tool for `areas`, `windows`, or `full monitors`. |
+| `battery_monitor` | Background daemon that sends low-battery notifications at 20/15/10/5% (critical below 10%). |
+| `chromium-tiled-launch` | Launch wrapper that fixes content-size rendering of Chromium-based browsers (Brave, Chrome, …) under the tiling WM. |
 
 ## Shortcuts & Control
 
@@ -128,5 +132,8 @@ The system uses a dynamic theming engine. You can change your entire system look
 apply-theme </path/to/your/wallpaper.jpg>
 ```
 
+## Shell (Zsh)
+The setup installs [Zsh](https://www.zsh.org/) with [Oh My Zsh](https://ohmyz.sh/) and sets it as the default login shell. It ships a custom two-line prompt (current directory and Git branch on the left, full path on the right, with a command timer) whose colors are wired to the Wallust palette, so the prompt re-themes together with the rest of the system. The shell configuration lives in `assets/zsh/`.
+
 ## Legal & Technical Note
-This build is based on source code from [suckless.org](https://suckless.org/). It includes several patches for dwm and dmenu to enable gaps, centering, and desktop file support.
+This build is based on source code from [suckless.org](https://suckless.org/). It includes several patches for dwm and dmenu to enable gaps, centering, colored status text (status2d), and desktop file support.
