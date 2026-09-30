@@ -29,7 +29,7 @@
 ! --- DWM Colors ---
 dwm.normbgcolor:     {{background}}
 dwm.normfgcolor:     {{foreground}}
-dwm.normbordercolor: {{color8}}
+dwm.normbordercolor: {{color0}}
 dwm.selbgcolor:      {{color4}}
 dwm.selfgcolor:      {{background}}
 dwm.selbordercolor:  {{color4}}
