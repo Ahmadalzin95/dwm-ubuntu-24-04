@@ -120,6 +120,7 @@ gsettings set org.gnome.desktop.interface icon-theme "$THEME_NAME"
 gsettings set org.gnome.desktop.interface cursor-theme "$CURSOR_NAME"
 gsettings set org.gnome.desktop.interface cursor-size 24
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font Mono 12'
 
 # Wallust installation
 WAL_TAG="3.4.0"
