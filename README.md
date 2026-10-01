@@ -99,6 +99,8 @@ This configuration uses Alt (Mod1) as the main key and Super (Windows Key) for s
 * `Alt + F1`: Open Calendar
 * `Super + Shift + p`: Open nsxiv Image Gallery
 * `Super + m`: Open Interactive Monitor Setup (display-setup)
+* `Super + e`: Open File Manager (Nautilus)
+* `Super + Shift + e`: Open superfile (`spf`, terminal file manager)
 
 ### Window Management
 

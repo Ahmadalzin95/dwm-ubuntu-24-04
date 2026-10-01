@@ -192,6 +192,12 @@ if [ -f "$BOOT_ZIP" ]; then
     sudo update-initramfs -u
 fi
 
+# superfile (spf): TUI file manager
+if ! command -v spf >/dev/null 2>&1; then
+    echo "Installing superfile (spf)..."
+    bash -c "$(curl -sLo- https://superfile.netlify.app/install.sh)"
+fi
+
 # Ly: lightweight TUI display manager
 if ! command -v ly >/dev/null 2>&1; then
     echo "Installing Ly display manager..."
