@@ -22,7 +22,7 @@ The setup features a "Material-Black-Blueberry" aesthetic, powered by [Wallust](
 
 ## Demo
 
-![dwm - ubuntu 24.04 Demo](assets/demo.gif)
+![dwm - ubuntu 24.04 Demo](assets/demo.png)
 
 ## Performance Benchmark
 
