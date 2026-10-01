@@ -17,6 +17,8 @@ The setup features a "Material-Black-Blueberry" aesthetic, powered by [Wallust](
 * **Dynamic Theming:** Wallust integration for instant color switches.
 * **Low-Battery Warnings:** Threshold notifications (20/15/10/5%) plus a color-coded battery reading in the bar.
 * **Preconfigured Zsh:** Zsh + Oh My Zsh as the default shell, with a prompt that follows the Wallust colors.
+* **Scratchpad Terminal:** Toggle a floating dropdown terminal from anywhere with `Alt + o`.
+* **Per-Tag Layouts (pertag):** Each tag remembers its own layout, master size, window count and bar state.
 
 ## Demo
 
@@ -101,6 +103,7 @@ This configuration uses Alt (Mod1) as the main key and Super (Windows Key) for s
 * `Super + m`: Open Interactive Monitor Setup (display-setup)
 * `Super + e`: Open File Manager (Nautilus)
 * `Super + Shift + e`: Open superfile (`spf`, terminal file manager)
+* `Alt + o`: Toggle scratchpad terminal (floating dropdown)
 
 ### Window Management
 

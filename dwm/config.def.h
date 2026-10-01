@@ -35,6 +35,7 @@ static const Rule rules[] = {
 	{ "Gimp",      NULL,       NULL,       0,            1,           0,           -1 },
 	{ "Firefox",   NULL,       NULL,       1 << 8,       0,           0,           -1 },
 	{ "CalPopup",  NULL,       NULL,       0,            1,           1,           -1 },
+	{ "scratchpad",NULL,       NULL,       0,            1,           1,           -1 },
 	
 };
 
@@ -116,6 +117,9 @@ static const char *dunstclose[]     = { "dunstctl", "close",     NULL };
 static const char *dunstcloseall[]  = { "dunstctl", "close-all", NULL };
 static const char *dunsthistory[]   = { "dunstctl", "history-pop", NULL };
 static const char *dunstcontext[]   = { "dunstctl", "context",   NULL };
+/* scratchpad */
+static const char scratchpadname[]  = "scratchpad";
+static const char *scratchpadcmd[]  = { "gnome-terminal", "--class=scratchpad", NULL };
 
 /*
  * Xresources preferences to load at startup
@@ -175,6 +179,7 @@ static const Key keys[] = {
 	{ ControlMask,                  XK_space,	spawn,			{.v = dunstclose } },
     { ControlMask|ShiftMask,        XK_space,	spawn,			{.v = dunstcloseall } },
     { ControlMask,                  XK_grave,	spawn,			{.v = dunsthistory } },
+	{ MODKEY,                       XK_o,		togglescratch,	{.v = scratchpadcmd } },
     { ControlMask|ShiftMask,        XK_period,	spawn,			{.v = dunstcontext } },
 	{ Mod4Mask|ShiftMask,           XK_p,       spawn,          {.v = explorer } },
     { Mod4Mask,                     XK_m,       spawn,          {.v = displaysetup } },
