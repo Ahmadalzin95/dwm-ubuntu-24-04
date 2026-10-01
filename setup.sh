@@ -192,4 +192,25 @@ if [ -f "$BOOT_ZIP" ]; then
     sudo update-initramfs -u
 fi
 
+# Ly: lightweight TUI display manager
+if ! command -v ly >/dev/null 2>&1; then
+    echo "Installing Ly display manager..."
+    sudo apt install -y libpam0g-dev libxcb-xkb-dev xauth
+    ZIG_VER="0.16.0"
+    LY_TMP=$(mktemp -d)
+    curl -L "https://ziglang.org/download/${ZIG_VER}/zig-x86_64-linux-${ZIG_VER}.tar.xz" \
+        -o "$LY_TMP/zig.tar.xz"
+    tar -xf "$LY_TMP/zig.tar.xz" -C "$LY_TMP"
+    ZIG="$LY_TMP/zig-x86_64-linux-${ZIG_VER}/zig"
+    git clone https://codeberg.org/fairyglade/ly.git "$LY_TMP/ly"
+    ( cd "$LY_TMP/ly" && "$ZIG" build && sudo "$ZIG" build installexe -Dinit_system=systemd )
+    rm -rf "$LY_TMP"
+fi
+# Switch to Ly only if it actually installed, so a system is never left without a DM.
+if command -v ly >/dev/null 2>&1; then
+    sudo systemctl disable gdm.service 2>/dev/null || sudo systemctl disable gdm3.service 2>/dev/null || true
+    sudo systemctl disable getty@tty2.service 2>/dev/null || true
+    sudo systemctl enable ly@tty2.service
+fi
+
 echo "Setup complete"
