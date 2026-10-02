@@ -15,8 +15,10 @@ case $1 in
         ;;
     battery)
         #   > 20%  -> normal color  |  11-20% -> amber  |  <= 10% -> red
+        #   charging/full -> a green bolt icon is shown before the reading
         BAT_WARN="#ffb52a"   # amber (11-20%)
         BAT_CRIT="#ff3333"   # red   (<=10%)
+        BAT_CHG="#9ece6a"    # green (charging bolt)
         # Find the first available battery (BAT0 or BAT1)
         BAT=$(ls /sys/class/power_supply/ | grep BAT | head -n 1)
         if [ -z "$BAT" ]; then
@@ -24,12 +26,20 @@ case $1 in
             exit 0
         fi
         CAP=$(cat "/sys/class/power_supply/$BAT/capacity")
+        # Nerd Font bolt icon whenever AC power is connected (any Mains supply online)
+        CHG=""
+        for ps in /sys/class/power_supply/*/; do
+            if [ "$(cat "$ps/type" 2>/dev/null)" = "Mains" ] && [ "$(cat "$ps/online" 2>/dev/null)" = "1" ]; then
+                CHG="^c$BAT_CHG^$(printf '')^d^ "
+                break
+            fi
+        done
         if [ "$CAP" -le 10 ]; then
-            printf '^c%s^PWR %s%%^d^ | ' "$BAT_CRIT" "$CAP"
+            printf '%s^c%s^PWR %s%%^d^ | ' "$CHG" "$BAT_CRIT" "$CAP"
         elif [ "$CAP" -le 20 ]; then
-            printf '^c%s^PWR %s%%^d^ | ' "$BAT_WARN" "$CAP"
+            printf '%s^c%s^PWR %s%%^d^ | ' "$CHG" "$BAT_WARN" "$CAP"
         else
-            printf 'PWR %s%% | ' "$CAP"
+            printf '%sPWR %s%% | ' "$CHG" "$CAP"
         fi
         ;;
     temp)
