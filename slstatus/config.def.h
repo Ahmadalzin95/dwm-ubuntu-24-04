@@ -71,7 +71,7 @@ static const struct arg args[] = {
 	{ cpu_perc, "CPU %s%% ",      NULL  },
 	{ run_command,  "%s°C | ",        "hw_status temp" },
 	{ run_command,  " %s | ",  "pamixer --get-volume-human" },
-	{ run_command,  "PWR %s%% | ",      "hw_status battery" },
+	{ run_command,  "%s",      "hw_status battery" },
 	{ run_command, "%s | ", "bt_status" },
 	{ run_command,  "  %s ",            "hw_status wifi_essid" },
     { run_command,  "%s%% | ",          "hw_status wifi_perc" },
